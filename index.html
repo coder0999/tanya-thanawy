@@ -2,161 +2,76 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>شريط التنقل</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>شريط تنقل سفلي</title>
   <style>
-    :root {
-      font-size: 16px;
-      --primary-color: #007bff;
-      --active-bg: #cce4ff;
-      --inactive-color: #999;
-    }
-
-    body {
+    * {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      background: #f9f9f9;
-      font-family: sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 1.5rem 0;
-      background: linear-gradient(to top, #f9f9f9, #ffffff);
-      border-radius: 2rem 2rem 0 0;
-      box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
-      height: 5.5rem;
-      width: 100%;
-      max-width: 100vw;
       box-sizing: border-box;
     }
 
-    .icon-m1 {
-      width: 3.6rem;
-      height: 3.6rem;
-      color: var(--inactive-color);
-      background: none;
-      border: none;
-      border-radius: 1rem;
-      padding: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      outline: none;
-      box-shadow: none;
-      -webkit-tap-highlight-color: transparent;
-      transition: transform 0.1s ease;
+    body {
+      font-family: sans-serif;
+      background: #f9f9f9;
+      padding-bottom: 56px; /* مساحة لشريط التنقل */
+      touch-action: manipulation;
     }
 
-    .icon-m1 svg {
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
       width: 100%;
-      height: 100%;
-      stroke-width: 1.5;
-      stroke: currentColor;
-      fill: none;
-      pointer-events: none;
+      display: flex;
+      justify-content: space-around;
+      background: #ffffff;
+      border-top: 1px solid #ccc;
+      box-shadow: 0 -1px 6px rgba(0,0,0,0.05);
+      z-index: 10;
     }
 
-    .icon-m1.active {
-      background-color: var(--active-bg);
-      color: var(--primary-color);
-    }
-
-    .icon-m1.active svg {
-      fill: currentColor;
-      stroke: none;
-    }
-
-    .icon-m1:active {
-      transform: scale(0.95);
-    }
-
-    .icon-m1:focus {
+    .tab {
+      flex: 1;
+      padding: 12px 0;
+      border: none;
+      background: none;
       outline: none;
+      cursor: pointer;
     }
 
-    @media (max-width: 480px) {
-      :root {
-        font-size: 18px;
-      }
-
-      nav {
-        height: 6rem;
-        padding: 1.2rem 0;
-      }
-
-      .icon-m1 {
-        width: 3.2rem;
-        height: 3.2rem;
-      }
+    .tab svg {
+      width: 24px;
+      height: 24px;
+      fill: #888;
+      transition: fill 0.3s ease;
     }
 
-    @media (max-width: 360px) {
-      :root {
-        font-size: 14px;
-      }
-
-      nav {
-        height: 5rem;
-      }
-    }
-
-    /* منع العرض على الكمبيوتر */
-    @media (min-width: 768px) {
-      body::before {
-        content: "⚠️ هذا التصميم مخصص للهواتف المحمولة أو التابلت فقط.";
-        display: block;
-        padding: 3rem;
-        text-align: center;
-        color: #555;
-        font-size: 1.2rem;
-      }
-
-      nav {
-        display: none;
-      }
+    .tab.active svg {
+      fill: #007bff;
+      filter: drop-shadow(0 0 4px rgba(0, 123, 255, 0.4));
     }
   </style>
 </head>
 <body>
 
-  <nav>
-    <button class="icon-m1 active" aria-label="البيت" type="button">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M3.5 12.5H5v6A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5v-6h1.5a.499.499 0 0 0 .35-.85l-8.5-8.5c-.2-.2-.51-.2-.71 0l-8.49 8.5c-.14.14-.19.36-.11.54s.26.31.46.31"/>
+  <nav class="bottom-nav">
+    <button class="tab active">
+      <svg viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
       </svg>
     </button>
-
-    <button class="icon-m1" aria-label="الكتاب" type="button">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 2l.117 .007a1 1 0 0 1 .876 .876l.007 .117v4l.005 .15a2 2 0 0 0 1.838 1.844l.157 .006h4l.117 .007a1 1 0 0 1 .876 .876l.007 .117v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-10a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-14a3 3 0 0 1 2.824 -2.995l.176 -.005zm3 14h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m0 -4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m-5 -4h-1a1 1 0 1 0 0 2h1a1 1 0 0 0 0 -2"/>
-        <path d="M19 7h-4l-.001 -4.001z"/>
+    <button class="tab">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4S8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
       </svg>
     </button>
-
-    <button class="icon-m1" aria-label="الصفحة" type="button">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M18.5 3h-12A2.5 2.5 0 0 0 4 5.5v13c0 .18.02.35.06.52.21 1.21 1.1 1.74 1.86 1.91l.14.03c.16.03.31.04.44.04h13c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-13q-.135 0-.27-.03h-.04c-.57-.12-1.03-.57-1.15-1.14-.02-.1-.04-.2-.04-.32 0-.83.67-1.5 1.5-1.5h12c.83 0 1.5-.67 1.5-1.5V4.5c0-.83-.67-1.5-1.5-1.5m-2 5h-8c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h8c.28 0 .5.22.5.5s-.22.5-.5.5"/>
-      </svg>
-    </button>
-
-    <button class="icon-m1" aria-label="التلفون" type="button">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M13.48 16.16c-.65-.36-2.13-1.25-3.26-2.38s-2.02-2.61-2.38-3.26l2.49-2.31L6.72 2.8 3.01 5.37v.25c-.02.26-.25 6.36 4.38 10.99 4.09 4.09 9.22 4.4 10.65 4.4h.58l2.57-3.72-5.42-3.61-2.3 2.49Z"/>
+    <button class="tab">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
       </svg>
     </button>
   </nav>
 
-  <script>
-    const buttons = document.querySelectorAll('.icon-m1');
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        buttons.forEach(b => b
+</body>
+</html>
