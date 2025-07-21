@@ -3,12 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>موقعي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #f2f2f2;
       direction: rtl;
+    }
+
+    /* تنبيه لأجهزة الكمبيوتر */
+    @media (min-width: 768px) {
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #eeeeee;
+        font-size: 18px;
+      }
+
+      body::before {
+        content: "⚠️ هذا التصميم مخصص للهواتف المحمولة أو التابلت فقط.";
+        color: #555;
+        font-size: 20px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      main, header, nav {
+        display: none;
+      }
     }
 
     header {
@@ -159,7 +184,7 @@
     </button>
   </nav>
 
-  <!-- ⚙️ سكربت التنقل بين التبويبات -->
+  <!-- ⚙️ سكربت التبديل بين التبويبات -->
   <script>
     function showTab(id) {
       document.querySelectorAll('section').forEach(sec => {
