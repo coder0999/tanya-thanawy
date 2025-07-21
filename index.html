@@ -1,198 +1,162 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>موقعي</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>شريط التنقل</title>
   <style>
+    :root {
+      font-size: 16px;
+      --primary-color: #007bff;
+      --active-bg: #cce4ff;
+      --inactive-color: #999;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f2f2f2;
-      direction: rtl;
-    }
-
-    /* تنبيه لأجهزة الكمبيوتر */
-    @media (min-width: 768px) {
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #eeeeee;
-        font-size: 18px;
-      }
-
-      body::before {
-        content: "⚠️ هذا التصميم مخصص للهواتف المحمولة أو التابلت فقط.";
-        color: #555;
-        font-size: 20px;
-        text-align: center;
-        padding: 20px;
-      }
-
-      main, header, nav {
-        display: none;
-      }
-    }
-
-    header {
+      padding: 0;
+      height: 100vh;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: #ffffff;
-      border-bottom: 1px solid #ddd;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: #f9f9f9;
+      font-family: sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    header svg {
-      margin-left: auto;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-    }
-
-    main {
-      padding: 20px;
-      padding-bottom: 80px;
-      text-align: center;
-    }
-
-    .card {
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin: 20px auto;
-      padding: 20px;
-      max-width: 300px;
-    }
-
-    .card svg {
-      width: 70px;
-      height: 70px;
-      margin-bottom: 10px;
-    }
-
-    section {
-      display: none;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      background-color: #2c3e50;
+    nav {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      border-top: 1px solid #ccc;
+      padding: 1.5rem 0;
+      background: linear-gradient(to top, #f9f9f9, #ffffff);
+      border-radius: 2rem 2rem 0 0;
+      box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
+      height: 5.5rem;
+      width: 100%;
+      max-width: 100vw;
+      box-sizing: border-box;
     }
 
-    .bottom-nav button {
+    .icon-m1 {
+      width: 3.6rem;
+      height: 3.6rem;
+      color: var(--inactive-color);
       background: none;
       border: none;
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
+      border-radius: 1rem;
+      padding: 0.5rem;
       display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+      box-shadow: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.1s ease;
     }
 
-    .bottom-nav button svg {
-      width: 20px;
-      height: 20px;
-      margin-bottom: 2px;
-      fill: white;
+    .icon-m1 svg {
+      width: 100%;
+      height: 100%;
+      stroke-width: 1.5;
+      stroke: currentColor;
+      fill: none;
+      pointer-events: none;
     }
 
-    .bottom-nav button:hover svg {
-      fill: #1abc9c;
+    .icon-m1.active {
+      background-color: var(--active-bg);
+      color: var(--primary-color);
+    }
+
+    .icon-m1.active svg {
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .icon-m1:active {
+      transform: scale(0.95);
+    }
+
+    .icon-m1:focus {
+      outline: none;
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        font-size: 18px;
+      }
+
+      nav {
+        height: 6rem;
+        padding: 1.2rem 0;
+      }
+
+      .icon-m1 {
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      :root {
+        font-size: 14px;
+      }
+
+      nav {
+        height: 5rem;
+      }
+    }
+
+    /* منع العرض على الكمبيوتر */
+    @media (min-width: 768px) {
+      body::before {
+        content: "⚠️ هذا التصميم مخصص للهواتف المحمولة أو التابلت فقط.";
+        display: block;
+        padding: 3rem;
+        text-align: center;
+        color: #555;
+        font-size: 1.2rem;
+      }
+
+      nav {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- 👤 رمز بروفايل SVG على اليمين -->
-  <header>
-    <svg onclick="showTab('profile')" xmlns="http://www.w3.org/2000/svg" fill="#2c3e50" viewBox="0 0 24 24">
-      <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-    </svg>
-  </header>
-
-  <!-- 🧱 المحتوى الأساسي -->
-  <main>
-    <section id="home" class="active">
-      <div class="card">
-        <svg fill="#1abc9c" viewBox="0 0 24 24">
-          <path d="M3 3h18v2H3V3zm0 4h18v2H3V7zm0 4h10v2H3v-2zm0 4h10v2H3v-2zm0 4h10v2H3v-2z"/>
-        </svg>
-        <h2>المتجر</h2>
-        <p>استعرض منتجاتنا الرقمية بكل سهولة.</p>
-      </div>
-
-      <div class="card">
-        <svg fill="#3498db" viewBox="0 0 24 24">
-          <path d="M20 6H4v12h16V6zM4 4c-1.1 0-2 .9-2 2v12a2 2 0 002 2h5v2h6v-2h5a2 2 0 002-2V6a2 2 0 00-2-2H4z"/>
-        </svg>
-        <h2>الاختبارات</h2>
-        <p>ابدأ رحلتك في التقييم الذاتي.</p>
-      </div>
-    </section>
-
-    <section id="summaries">
-      <h1>📚 التلخيصات</h1>
-      <p>هنا تظهر التلخيصات الخاصة بالمحتوى.</p>
-    </section>
-
-    <section id="reviews">
-      <h1>⭐ التقييمات</h1>
-      <p>عرض تقييمات وآراء المستخدمين.</p>
-    </section>
-
-    <section id="profile">
-      <h1>👤 الملف الشخصي</h1>
-      <p>معلوماتك الشخصية تعرض هنا.</p>
-    </section>
-  </main>
-
-  <!-- 🧭 شريط التنقل السفلي مع SVG لكل زر -->
-  <nav class="bottom-nav">
-    <button onclick="showTab('home')">
-      <svg viewBox="0 0 24 24">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+  <nav>
+    <button class="icon-m1 active" aria-label="البيت" type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M3.5 12.5H5v6A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5v-6h1.5a.499.499 0 0 0 .35-.85l-8.5-8.5c-.2-.2-.51-.2-.71 0l-8.49 8.5c-.14.14-.19.36-.11.54s.26.31.46.31"/>
       </svg>
-      الرئيسية
     </button>
-    <button onclick="showTab('summaries')">
-      <svg viewBox="0 0 24 24">
-        <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h12v2H3v-2z"/>
+
+    <button class="icon-m1" aria-label="الكتاب" type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 2l.117 .007a1 1 0 0 1 .876 .876l.007 .117v4l.005 .15a2 2 0 0 0 1.838 1.844l.157 .006h4l.117 .007a1 1 0 0 1 .876 .876l.007 .117v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-10a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-14a3 3 0 0 1 2.824 -2.995l.176 -.005zm3 14h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m0 -4h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m-5 -4h-1a1 1 0 1 0 0 2h1a1 1 0 0 0 0 -2"/>
+        <path d="M19 7h-4l-.001 -4.001z"/>
       </svg>
-      التلخيصات
     </button>
-    <button onclick="showTab('reviews')">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+
+    <button class="icon-m1" aria-label="الصفحة" type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M18.5 3h-12A2.5 2.5 0 0 0 4 5.5v13c0 .18.02.35.06.52.21 1.21 1.1 1.74 1.86 1.91l.14.03c.16.03.31.04.44.04h13c.28 0 .5-.22.5-.5s-.22-.5-.5-.5h-13q-.135 0-.27-.03h-.04c-.57-.12-1.03-.57-1.15-1.14-.02-.1-.04-.2-.04-.32 0-.83.67-1.5 1.5-1.5h12c.83 0 1.5-.67 1.5-1.5V4.5c0-.83-.67-1.5-1.5-1.5m-2 5h-8c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h8c.28 0 .5.22.5.5s-.22.5-.5.5"/>
       </svg>
-      التقييمات
+    </button>
+
+    <button class="icon-m1" aria-label="التلفون" type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M13.48 16.16c-.65-.36-2.13-1.25-3.26-2.38s-2.02-2.61-2.38-3.26l2.49-2.31L6.72 2.8 3.01 5.37v.25c-.02.26-.25 6.36 4.38 10.99 4.09 4.09 9.22 4.4 10.65 4.4h.58l2.57-3.72-5.42-3.61-2.3 2.49Z"/>
+      </svg>
     </button>
   </nav>
 
-  <!-- ⚙️ سكربت التبديل بين التبويبات -->
   <script>
-    function showTab(id) {
-      document.querySelectorAll('section').forEach(sec => {
-        sec.classList.remove('active');
-      });
-      document.getElementById(id).classList.add('active');
-    }
-  </script>
-
-</body>
-</html>
+    const buttons = document.querySelectorAll('.icon-m1');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(b => b
