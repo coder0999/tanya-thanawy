@@ -3,19 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>شريط تنقل سفلي</title>
+  <title>واجهة مخصصة</title>
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
       font-family: sans-serif;
-      background: #f9f9f9;
-      padding-bottom: 56px; /* مساحة لشريط التنقل */
+      background: #f4f4f4;
+      padding-bottom: 60px;
       touch-action: manipulation;
+      position: relative;
+    }
+
+    .profile-icon {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      fill: #555;
+    }
+
+    .coupons {
+      margin: 80px 16px 16px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .coupon {
+      flex: 1 1 140px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .coupon:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .coupon svg {
+      width: 32px;
+      height: 32px;
+      fill: #007bff;
     }
 
     .bottom-nav {
@@ -23,53 +63,70 @@
       bottom: 0;
       left: 0;
       width: 100%;
+      background: #fff;
+      border-top: 1px solid #ddd;
       display: flex;
       justify-content: space-around;
-      background: #ffffff;
-      border-top: 1px solid #ccc;
+      padding: 8px 0;
       box-shadow: 0 -1px 6px rgba(0,0,0,0.05);
-      z-index: 10;
+      touch-action: manipulation;
     }
 
     .tab {
-      flex: 1;
-      padding: 12px 0;
       border: none;
       background: none;
       outline: none;
+      flex: 1;
+      text-align: center;
+      padding: 6px 0;
       cursor: pointer;
     }
 
     .tab svg {
       width: 24px;
       height: 24px;
-      fill: #888;
-      transition: fill 0.3s ease;
+      stroke: #888;
+      stroke-width: 2;
+      fill: none;
+      transition: stroke 0.3s ease;
+    }
+
+    .tab.active {
+      border-radius: 8px;
+      border: 2px solid #bbddff;
     }
 
     .tab.active svg {
-      fill: #007bff;
-      filter: drop-shadow(0 0 4px rgba(0, 123, 255, 0.4));
+      stroke: #007bff;
     }
   </style>
 </head>
 <body>
 
+  <svg class="profile-icon" viewBox="0 0 24 24">
+    <path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4z"/>
+  </svg>
+
+  <div class="coupons">
+    <div class="coupon">
+      <svg viewBox="0 0 24 24"><path d="M7 4h-2l-3 9v2h2a3 3 0 006 0h6a3 3 0 006 0h2v-2l-3-9h-2l-3 9H10z"/></svg>
+      <span>المتجر</span>
+    </div>
+    <div class="coupon">
+      <svg viewBox="0 0 24 24"><path d="M3 4v16h18V4H3zm2 2h14v12H5V6zm3 2v2h8V8H8zm0 4v2h6v-2H8z"/></svg>
+      <span>الاختبارات</span>
+    </div>
+  </div>
+
   <nav class="bottom-nav">
     <button class="tab active">
-      <svg viewBox="0 0 24 24">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-      </svg>
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
     </button>
     <button class="tab">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4S8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-      </svg>
+      <svg viewBox="0 0 24 24"><path d="M12 17l-4-4h3V7h2v6h3l-4 4z"/></svg>
     </button>
     <button class="tab">
-      <svg viewBox="0 0 24 24">
-        <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
-      </svg>
+      <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h10v2H4zm0 5h16v2H4z"/></svg>
     </button>
   </nav>
 
