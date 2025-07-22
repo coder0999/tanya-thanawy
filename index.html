@@ -2,113 +2,257 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>موقع سريع</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>موقعي</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      font-size: 16px;
+      --primary-color: #007bff;     /* الأزرق للزر النشط */
+      --active-bg: #cce4ff;         /* خلفية الزر النشط */
+      --inactive-color: #999;
     }
 
     body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
       font-family: sans-serif;
-      background: #f5f5f5;
-      padding-bottom: 64px;
-      touch-action: manipulation;
+      background: #f9f9f9;
+      direction: rtl;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .profile-icon {
-      position: absolute;
-      top: 16px;
-      right: 16px;
+    /* زر البروفايل العائم */
+    #profile-icon {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 1000;
+      background-color: white;
+      border-radius: 50%;
+      padding: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       width: 32px;
       height: 32px;
-      fill: #555;
+      cursor: pointer;
     }
 
-    .main-content {
-      padding: 80px 16px 16px;
+    #back-arrow {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 1000;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      display: none;
+    }
+
+    main {
+      padding: 20px;
+      padding-bottom: 80px;
       text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 300px;
+    }
+
+    .card svg {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 10px;
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
     }
 
     .bottom-nav {
       position: fixed;
       bottom: 0;
-      left: 0;
       width: 100%;
-      background: #fff;
-      border-top: 1px solid #ccc;
+      height: 60px;
+      background: linear-gradient(to top, #e0e0e0, #f9f9f9); /* تدرج رمادي */
       display: flex;
       justify-content: space-around;
-      box-shadow: 0 -1px 6px rgba(0,0,0,0.05);
-      z-index: 10;
-      touch-action: manipulation;
+      align-items: center;
+      border-top: 1px solid #bottom-nav buttonccc;
     }
 
-    .tab {
-      flex: 1;
-      border: none;
+    . {
       background: none;
-      outline: none;
-      padding: 12px 0;
+      border: none;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      outline: none;
+      transition: transform 0.1s ease;
     }
 
-    .tab:active {
-      background: rgba(0, 123, 255, 0.1);
+    .bottom-nav button:active {
+      transform: scale(0.95);
     }
 
-    .tab svg {
-      width: 24px;
-      height: 24px;
-      stroke: #888;
-      stroke-width: 2;
-      fill: none;
-      transition: stroke 0.3s ease;
+    .bottom-nav button.active {
+      background-color: var(--active-bg);
+      border-radius: 1rem;
+      color: var(--primary-color);
     }
 
-    .tab.active {
-      border: 2px solid #bbddff;
-      border-radius: 8px;
+    .bottom-nav button.active svg {
+      fill: currentColor;
+      stroke: none;
     }
 
-    .tab.active svg {
-      stroke: #007bff;
+    .bottom-nav button svg {
+      width: 20px;
+      height: -bottom: 2px;
+     20px;
+      margin fill: white;
+    }
+
+    @media (min-width: 768px) {
+      body::before {
+        content: "⚠️ هذا التصميم مخصص للهواتف المحمولة أو التابلت فقط.";
+        display: block;
+        padding: 3rem;
+        text-align: center;
+        color: #555;
+        font-size: 1.2rem;
+      }
+
+      main, #profile-icon, #back-arrow, .bottom-nav {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
 
-  <svg class="profile-icon" viewBox="0 0 24 24">
-    <path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4z"/>
+  <!-- زر البروفايل العائم -->
+  <svg id="profile-icon" xmlns="http://www.w3.org/2000/svg" fill="#2c3e50" viewBox="0 0 24 24">
+    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
   </svg>
 
-  <div class="main-content" id="content">أهلاً الصفحة الرئيسية</div>
+  <!-- زر الرجوع -->
+  <svg id="back-arrow" xmlns="http://www.w3.org/2000/svg" fill="#2c3e50" viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+
+  <main>
+    <section id="home" class="active">
+      <div class="card">
+        <svg fill="#1abc9c" viewBox="0 0 24 24">
+          <path d="M3 3h18v2H3V3zm0 4h18v2H3V7zm0 4h10v2H3v-2zm0 4h10v2H3v-2zm0 4h10v2H3v-2z"/>
+        </svg>
+        <h2>المتجر</h2>
+        <p>استعرض منتجاتنا الرقمية بكل سهولة.</p>
+      </ class="card">
+       div>
+
+      <div <svg fill="#3498db" viewBox="0 0 24 24">
+          <path d="M20 6H4v12h16V6zM4 4c-a2 2 0 002 2h5v21.1 0-2 .9-2 2v12h6v-2h5a2 2 0 0022H4z"/>
+        </-2V6a2 2 0 00-2-svg>
+        <h2>الاختبارات</h2>
+        <p>ابدأ رحلتك في التقييم الذاتي.</p>
+      </div>
+    </section>
+
+    <section id="summaries">
+      <h1>📚 التلخيصات</h1>
+      <p>هنا تظهر التلخيصات الخاصة بالمحتوى.</p>
+    </section>
+
+    <section id="reviews">
+      <h1>⭐ التقييمات</h1>
+      <p>عرض تقييمات وآراء المستخدمين.</p>
+    </section>
+
+    <section id="profile">
+      <h1>👤 الملف الشخصي</h1>
+      <p>معلوماتك الشخصية تعرض هنا.</p>
+    </section>
+  </main>
 
   <nav class="bottom-nav">
-    <button class="tab active" onclick="setPage('الصفحة الرئيسية', this)">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    <button onclick="showTab('home')" class="active">
+      <svg viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+      الرئيسية
     </button>
-    <button class="tab" onclick="setPage('التقييمات', this)">
-      <svg viewBox="0 0 24 24"><path d="M12 17l-4-4h3V7h2v6h3l-4 4z"/></svg>
+    <button onclick="showTab('summaries')">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h12v2H3v-2z"/>
+      </svg>
+      التلخيصات
     </button>
-    <button class="tab" onclick="setPage('الكتب', this)">
-      <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h10v2H4zm0 5h16v2H4z"/></svg>
+    <button onclick="showTab('reviews')">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+      </svg>
+      التقييمات
     </button>
   </nav>
+    <script>
+    function showTab(id) {
+      // إخفاء كل الأقسام
+      document.querySelectorAll('section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      // إظهار القسم المطلوب
+      document.getElementById(id).classList.add('active');
 
-  <script>
-    function setPage(name, el) {
-      document.getElementById('content').textContent = 'أهلاً ' + name;
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      el.classList.add('active');
+      // تحديث الزر النشط في شريط التنقل فقط
+      document.querySelectorAll('.bottom-nav button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      const navButton = document.querySelector(`.bottom-nav button[onclick="showTab('${id}')"]`);
+) {
+        navButton      if (navButton.classList.add('active');
+      }
+
+      // إظهار أو إخفاء شريط التنقل والسهم حسب التبويب
+      const navBar = document.querySelector('.bottom-nav');
+      const profileIcon = document.getElementById('profile-icon');
+      const backArrow = document.getElementById('back-arrow');
+
+      if (id === 'profile') {
+        navBar.style.display = 'none';
+        profileIcon.style.display = 'none';
+        backArrow.style.display = 'block';
+      } else {
+        navBar.style.display = 'flex';
+        profileIcon.style.display = 'block';
+        backArrow.style.display = 'none';
+      }
     }
-  </script>
 
+    // زر البروفايل
+    document.getElementById('profile-icon').addEventListener('click', () => {
+      showTab('profile');
+    });
+
+    // زر الرجوع
+    document.getElementById('back-arrow').addEventListener('click', () => {
+      showTab('home');
+    });
+  </script>
 </body>
 </html>
