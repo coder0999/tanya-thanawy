@@ -8,7 +8,7 @@
     :root {
       font-size: 16px;
       --primary-color: #339CFF;
-      --active-bg: #e0f0ff;
+      --active-bg: #f0f8ff;
       --inactive-color: #999;
     }
 
@@ -58,11 +58,14 @@
       bottom: 0;
       width: 100%;
       height: 60px;
-      background-color: #e6e6e6;
+      background-color: #fff;
       display: flex;
       justify-content: space-around;
       align-items: center;
       border-top: 1px solid #ccc;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
     }
 
     .bottom-nav button {
@@ -77,14 +80,11 @@
       align-items: center;
       -webkit-tap-highlight-color: rgba(0,0,0,0);
       outline: none;
+      padding: 4px 8px;
     }
 
     .bottom-nav button.active {
-      background-color: var(--active-bg);
-      border-radius: 1rem;
       color: var(--primary-color);
-      padding: 6px 10px;
-      border: 2px solid var(--primary-color);
     }
 
     .bottom-nav button svg {
@@ -111,10 +111,11 @@
   </style>
 </head>
 <body>
-
   <header id="header-bar">
-    <svg id="profile-icon" xmlns="http://www.w3.org/2000/svg" fill="#2c3e50" viewBox="0 0 24 24">
-      <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+    <svg id="profile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="32" height="32">
+      <path d="M25,1A24,24,0,1,0,49,25,24,24,0,0,0,25,1Zm0,46A22,22,0,1,1,47,25,22,22,0,0,1,25,47Z"/>
+      <path d="M25,25.41a13,13,0,0,0-13,13,1,1,0,0,0,2,0,11,11,0,1,1,22,0,1,1,0,0,0,2,0A13,13,0,0,0,25,25.41Z"/>
+      <path d="M25,23.71a7,7,0,0,0,6.81-7.2A7,7,0,0,0,25,9.3a7,7,0,0,0-6.81,7.21A7,7,0,0,0,25,23.71Z"/>
     </svg>
 
     <svg id="back-arrow" xmlns="http://www.w3.org/2000/svg" fill="#2c3e50" viewBox="0 0 24 24" style="display:none;">
@@ -142,20 +143,23 @@
 
   <nav class="bottom-nav">
     <button onclick="showTab('home')" class="active">
-      <svg viewBox="0 0 24 24">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+        <path d="M55.579,31.579c0.693,0.693 0.781,1.787 0.208,2.583c-0.396,0.549 -0.857,1.189 -1.284,1.781c-0.342,0.476 -0.877,0.777 -1.461,0.824c-0.585,0.048 -1.161,-0.164 -1.575,-0.579c-4.986,-4.985 -19.467,-19.466 -19.467,-19.466c0,0 -14.481,14.481 -19.467,19.466c-0.414,0.415 -0.99,0.627 -1.575,0.579c-0.584,-0.047 -1.119,-0.348 -1.461,-0.824c-0.427,-0.592 -0.888,-1.232 -1.284,-1.781c-0.573,-0.796 -0.485,-1.89 0.208,-2.583c4.962,-4.962 23.579,-23.579 23.579,-23.579c0,0 18.617,18.617 23.579,23.579Z" style="fill:none;stroke:#222a33;stroke-width:2px;"/>
+        <path d="M13.977,34.745l18.023,-18.023l18.023,18.023l0,20.002c0,0.598 -0.237,1.171 -0.66,1.593c-0.422,0.423 -0.995,0.66 -1.593,0.66c-6.472,0 -25.068,0 -31.54,0c-0.598,0 -1.171,-0.237 -1.593,-0.66c-0.423,-0.422 -0.66,-0.995 -0.66,-1.593l0,-20.002Z" style="fill:none;stroke:#222a33;stroke-width:2px;"/>
       </svg>
       الرئيسية
     </button>
+
     <button onclick="showTab('summaries')">
-      <svg viewBox="0 0 24 24">
-        <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h12v2H3v-2z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20">
+        <path d="M27,0H7A4,4,0,0,0,3,4V5H1A2,2,0,0,0,3,7v3H1a2,2,0,0,0,2,2v3H1a2,2,0,0,0,2,2v3H5V17H7v3H9V2h3V13a1,1,0,0,0,1.55.83L16,12.2l2.45,1.63A1,1,0,0,0,20,13V2h7a2,2,0,0,1,2,2V20h2V4A4,4,0,0,0,27,0Z"/>
       </svg>
       التلخيصات
     </button>
+
     <button onclick="showTab('reviews')">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="20" height="20">
+        <path fill="#54a5ff" d="M53,19h2a2,2,0,0,1,2,2V52a2,2,0,0,1-2,2H38.8A3.36,3.36,0,0,0,36,55.5c-1.2,1.82-3,1.5-5.2,1.5-3.07,0-2.53-3-5.6-3H9a2,2,0,0,1-2-2V21a2,2,0,0,1,2-2h2"/>
       </svg>
       التقييمات
     </button>
