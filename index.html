@@ -31,8 +31,8 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            height: 50px; /* تحديد ارتفاع ثابت للشريط العلوي */
-            padding: 0 1.25rem; /* إزالة الـ padding العمودي */
+            height: 50px;
+            padding: 0 1.25rem;
             background-color: var(--background-color);
             border-bottom: 1px solid #e9ecef;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -67,10 +67,10 @@
         .points-display {
             background-color: var(--active-bg);
             color: var(--primary-color);
-            padding: 0.3rem 0.6rem; /* تصغير حجم الخانة */
+            padding: 0.3rem 0.6rem;
             border-radius: 0.75rem;
             font-weight: 600;
-            font-size: 0.8rem; /* تصغير حجم الخط */
+            font-size: 0.8rem;
             margin-left: auto;
             margin-right: 1rem;
             display: flex;
@@ -84,8 +84,8 @@
             padding-bottom: 80px;
             text-align: center;
             background-color: #f8f9fa;
-            min-height: calc(100vh - 70px - 50px); /* تعديل المسافة العلوية بسبب الشريط الثابت (50px) */
-            padding-top: calc(50px + 2rem); /* ارتفاع الهيدر الثابت + البادينج الأصلي */
+            min-height: calc(100vh - 70px - 50px);
+            padding-top: calc(50px + 2rem);
         }
 
         h1 {
@@ -185,13 +185,73 @@
             stroke: white;
         }
 
-
         .bottom-nav button:hover svg {
             transform: scale(1.1);
         }
 
         .bottom-nav button span {
             margin-top: 4px;
+        }
+
+        /* تنسيق بطاقات الصفحة الرئيسية */
+        .home-cards-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: calc(50% - 0.5rem); /* مربعين بجانب بعض مع مسافة بينهما */
+            aspect-ratio: 1 / 1; /* لجعل البطاقة مربعة */
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            padding: 1rem;
+            text-align: right;
+            cursor: pointer;
+            transition: transform 0.1s ease-in-out;
+            user-select: none; /* منع تحديد النص */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+
+        .card:active {
+            transform: scale(0.97);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white; /* لون النص في البطاقات */
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .card-description {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            position: absolute;
+            top: 3.5rem;
+            right: 1rem;
+        }
+
+        .card svg {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            width: 36px;
+            height: 36px;
+        }
+        
+        /* ألوان البطاقات */
+        .store-card {
+            background-color: #FFD700;
+        }
+
+        .summaries-card {
+            background-color: #00A693;
         }
     </style>
 </head>
@@ -212,7 +272,28 @@
 
     <main>
         <section id="home" class="active">
-            <h1>أهلاً في الصفحة الرئيسية</h1>
+            <div class="home-cards-container">
+                <a class="card store-card" onclick="showTab('store')">
+                    <h2 class="card-title">المتجر</h2>
+                    <p class="card-description">لشراء المنتجات الخاصة بالمواد الدراسية</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                </a>
+                <a class="card summaries-card" onclick="showTab('summaries')">
+                    <h2 class="card-title">الملخصات</h2>
+                    <p class="card-description">ملخصات شاملة للمناهج التعليمية</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        <line x1="10" y1="6" x2="16" y2="6"></line>
+                        <line x1="10" y1="10" x2="16" y2="10"></line>
+                        <line x1="10" y1="14" x2="16" y2="14"></line>
+                    </svg>
+                </a>
+            </div>
         </section>
 
         <section id="exams">
@@ -222,9 +303,17 @@
         <section id="reviews">
             <h1>أهلاً في صفحة التقييمات</h1>
         </section>
-
+        
         <section id="profile">
             <h1>أهلاً في الملف الشخصي</h1>
+        </section>
+
+        <section id="store">
+            <h1>أهلاً في المتجر</h1>
+        </section>
+
+        <section id="summaries">
+            <h1>أهلاً في صفحة الملخصات</h1>
         </section>
     </main>
 
@@ -285,7 +374,7 @@
             const backArrow = document.getElementById('back-arrow');
             const pointsDisplay = document.getElementById('points-display');
 
-            if (id === 'profile') {
+            if (id === 'profile' || id === 'store' || id === 'summaries') {
                 navBar.style.display = 'none';
                 profileIcon.style.display = 'none';
                 backArrow.style.display = 'block';
@@ -309,7 +398,7 @@
         document.getElementById('back-arrow').addEventListener('click', () => {
             showTab('home');
         });
-
+        
         document.addEventListener('DOMContentLoaded', () => {
             showTab('home');
         });
