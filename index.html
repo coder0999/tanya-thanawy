@@ -31,7 +31,8 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            padding: 0.75rem 1.25rem; /* تصغير حجم الشريط العلوي */
+            height: 50px; /* تحديد ارتفاع ثابت للشريط العلوي */
+            padding: 0 1.25rem; /* إزالة الـ padding العمودي */
             background-color: var(--background-color);
             border-bottom: 1px solid #e9ecef;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -66,10 +67,10 @@
         .points-display {
             background-color: var(--active-bg);
             color: var(--primary-color);
-            padding: 0.4rem 0.7rem;
+            padding: 0.3rem 0.6rem; /* تصغير حجم الخانة */
             border-radius: 0.75rem;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem; /* تصغير حجم الخط */
             margin-left: auto;
             margin-right: 1rem;
             display: flex;
@@ -83,8 +84,8 @@
             padding-bottom: 80px;
             text-align: center;
             background-color: #f8f9fa;
-            min-height: calc(100vh - 70px - 58px);
-            padding-top: calc(50px + 2rem); /* تعديل الـ padding-top ليتناسب مع حجم الهيدر الجديد */
+            min-height: calc(100vh - 70px - 50px); /* تعديل المسافة العلوية بسبب الشريط الثابت (50px) */
+            padding-top: calc(50px + 2rem); /* ارتفاع الهيدر الثابت + البادينج الأصلي */
         }
 
         h1 {
@@ -132,11 +133,11 @@
             outline: none;
             padding: 6px 12px;
             position: relative;
-            transition: color 0.3s ease, background-color 0.3s ease, transform 0.05s ease-in-out; /* تأثير ضغط سريع */
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.05s ease-in-out;
         }
 
         .bottom-nav button:active {
-            transform: scale(0.97); /* تأثير ضغط خفيف جداً */
+            transform: scale(0.97);
         }
 
         .bottom-nav button.active {
@@ -169,7 +170,6 @@
             stroke: var(--icon-active-fill);
         }
 
-        /* تعديل أيقونات الاختبارات والتقييمات فقط لتكون ممتلئة بالتفاصيل البيضاء */
         .bottom-nav button[onclick="showTab('exams')"].active svg,
         .bottom-nav button[onclick="showTab('reviews')"].active svg {
             fill: var(--icon-active-fill);
