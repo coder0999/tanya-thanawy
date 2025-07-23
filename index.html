@@ -12,7 +12,7 @@
             --inactive-color: #999;
             --background-color: #ffffff;
             --text-color: #212529;
-            --icon-active-fill: #007bff; /* لون الملء للأيقونات النشطة */
+            --icon-active-fill: #007bff;
         }
 
         body {
@@ -31,28 +31,28 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            padding: 1rem 1.25rem;
+            padding: 0.75rem 1.25rem; /* تصغير حجم الشريط العلوي */
             background-color: var(--background-color);
             border-bottom: 1px solid #e9ecef;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-            position: fixed; /* تثبيت الشريط العلوي */
+            position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
         }
 
         #profile-icon {
-            width: 26px; /* تصغير حجم الأيقونة */
-            height: 26px; /* تصغير حجم الأيقونة */
+            width: 26px;
+            height: 26px;
             color: var(--secondary-color);
             cursor: pointer;
-            transition: transform 0.1s ease-in-out; /* تأثير الضغط */
-            fill: none; /* للتأكد من عدم وجود ملء افتراضي */
-            stroke: currentColor; /* للتأكد من أن الحدود تستخدم اللون الحالي */
+            transition: transform 0.1s ease-in-out;
+            fill: none;
+            stroke: currentColor;
         }
 
         #profile-icon:active {
-            transform: scale(0.9); /* تصغير الأيقونة عند الضغط */
+            transform: scale(0.9);
         }
 
         #back-arrow {
@@ -66,16 +66,16 @@
         .points-display {
             background-color: var(--active-bg);
             color: var(--primary-color);
-            padding: 0.4rem 0.7rem; /* تصغير حجم الخانة */
+            padding: 0.4rem 0.7rem;
             border-radius: 0.75rem;
             font-weight: 600;
-            font-size: 0.85rem; /* تصغير حجم الخط */
-            margin-left: auto; /* يدفع الخانة لأقصى اليسار */
-            margin-right: 1rem; /* مسافة على يمين الخانة لتبعد عن أيقونة البروفايل */
+            font-size: 0.85rem;
+            margin-left: auto;
+            margin-right: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.3s ease-in-out; /* لتأثير الظهور والاختفاء */
+            transition: opacity 0.3s ease-in-out;
         }
 
         main {
@@ -83,8 +83,8 @@
             padding-bottom: 80px;
             text-align: center;
             background-color: #f8f9fa;
-            min-height: calc(100vh - 70px - 58px); /* تعديل المسافة العلوية بسبب الشريط الثابت */
-            padding-top: calc(58px + 2rem); /* ارتفاع الهيدر + البادينج الأصلي */
+            min-height: calc(100vh - 70px - 58px);
+            padding-top: calc(50px + 2rem); /* تعديل الـ padding-top ليتناسب مع حجم الهيدر الجديد */
         }
 
         h1 {
@@ -132,11 +132,11 @@
             outline: none;
             padding: 6px 12px;
             position: relative;
-            transition: color 0.3s ease, background-color 0.3s ease, transform 0.1s ease-in-out;
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.05s ease-in-out; /* تأثير ضغط سريع */
         }
 
         .bottom-nav button:active {
-            transform: scale(0.95);
+            transform: scale(0.97); /* تأثير ضغط خفيف جداً */
         }
 
         .bottom-nav button.active {
@@ -160,20 +160,31 @@
             width: 24px;
             height: 24px;
             stroke: var(--inactive-color);
-            fill: none; /* الأيقونات تكون غير مملوءة افتراضياً */
+            fill: none;
             transition: color 0.3s ease, transform 0.2s ease, fill 0.3s ease, stroke 0.3s ease;
         }
 
         .bottom-nav button.active svg {
-            fill: var(--icon-active-fill); /* ملء الأيقونة باللون الأزرق */
-            stroke: var(--icon-active-fill); /* جعل حدود الأيقونة باللون الأزرق */
+            fill: none;
+            stroke: var(--icon-active-fill);
         }
-        /* لضمان أن التفاصيل البيضاء داخل الأيقونات تظل بيضاء عند التفعيل */
-        .bottom-nav button.active svg path[stroke="white"],
-        .bottom-nav button.active svg line[stroke="white"],
-        .bottom-nav button.active svg polyline[stroke="white"] {
+
+        /* تعديل أيقونات الاختبارات والتقييمات فقط لتكون ممتلئة بالتفاصيل البيضاء */
+        .bottom-nav button[onclick="showTab('exams')"].active svg,
+        .bottom-nav button[onclick="showTab('reviews')"].active svg {
+            fill: var(--icon-active-fill);
+            stroke: var(--icon-active-fill);
+        }
+
+        .bottom-nav button[onclick="showTab('exams')"].active svg path[stroke="white"],
+        .bottom-nav button[onclick="showTab('exams')"].active svg line[stroke="white"],
+        .bottom-nav button[onclick="showTab('exams')"].active svg polyline[stroke="white"],
+        .bottom-nav button[onclick="showTab('reviews')"].active svg path[stroke="white"],
+        .bottom-nav button[onclick="showTab('reviews')"].active svg line[stroke="white"],
+        .bottom-nav button[onclick="showTab('reviews')"].active svg polyline[stroke="white"] {
             stroke: white;
         }
+
 
         .bottom-nav button:hover svg {
             transform: scale(1.1);
@@ -220,10 +231,9 @@
     <nav class="bottom-nav">
         <button onclick="showTab('home')" class="active">
             <div class="icon-container">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L3 9V21H21V9L12 2Z" fill="currentColor"/>
-                    <path d="M9 22V12H15V22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 2L2 9H22L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <path d="M9 22V12h6v10"></path>
                 </svg>
             </div>
             <span>الرئيسية</span>
@@ -273,21 +283,21 @@
             const navBar = document.querySelector('.bottom-nav');
             const profileIcon = document.getElementById('profile-icon');
             const backArrow = document.getElementById('back-arrow');
-            const pointsDisplay = document.getElementById('points-display'); // الحصول على عنصر النقاط
+            const pointsDisplay = document.getElementById('points-display');
 
             if (id === 'profile') {
                 navBar.style.display = 'none';
                 profileIcon.style.display = 'none';
                 backArrow.style.display = 'block';
-                pointsDisplay.style.display = 'none'; // إخفاء النقاط في صفحة البروفايل
+                pointsDisplay.style.display = 'none';
             } else {
                 navBar.style.display = 'flex';
                 profileIcon.style.display = 'block';
                 backArrow.style.display = 'none';
                 if (id === 'home') {
-                    pointsDisplay.style.display = 'flex'; // إظهار النقاط في الصفحة الرئيسية فقط
+                    pointsDisplay.style.display = 'flex';
                 } else {
-                    pointsDisplay.style.display = 'none'; // إخفاء النقاط في الصفحات الأخرى
+                    pointsDisplay.style.display = 'none';
                 }
             }
         }
@@ -300,7 +310,6 @@
             showTab('home');
         });
 
-        // تفعيل الزرار الأول (الرئيسية) عند تحميل الصفحة لأول مرة
         document.addEventListener('DOMContentLoaded', () => {
             showTab('home');
         });
