@@ -198,11 +198,12 @@
             display: flex;
             gap: 1rem;
             justify-content: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap; /* إجبار العناصر على البقاء في صف واحد */
         }
 
         .card {
-            width: 45%; /* تصغير حجم الكرتين */
+            width: 40%; /* تصغير حجم الكرتين أكثر */
+            min-width: 140px; /* ضمان عدم التصغير أكثر من اللازم على الشاشات الصغيرة */
             aspect-ratio: 1 / 1;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
