@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0034)file:///C:/Users/zt/Desktop/k.html -->
-<html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="ar" dir="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>موقعي</title>
     <style>
@@ -16,7 +16,7 @@
             --border-color: #e9ecef;
             --card-shadow: rgba(0, 0, 0, 0.08);
             --dropdown-bg: #ffffff;
-            --dropdown-item-hover: #f1f3f5;
+            --dropdown-item-hover: #f1f3f5; /* هذا اللون لم يعد يستخدم لتأثير الضغط، بل اللون النشط */
         }
 
         body.dark-mode {
@@ -145,11 +145,12 @@
             outline: none;
             padding: 6px 12px;
             position: relative;
-            transition: all 0.15s ease; /* Keep a subtle transition for active state */
+            /* تم تسريع الانتقال هنا */
+            transition: all 0.1s ease; 
         }
 
         .bottom-nav button:active {
-            transform: scale(0.95); /* Adjusted for a more pronounced tap effect */
+            transform: scale(0.95);
         }
 
         .bottom-nav button.active {
@@ -162,7 +163,8 @@
             justify-content: center;
             padding: 6px 12px;
             border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
+            /* تم تسريع الانتقال هنا */
+            transition: background-color 0.1s ease; 
         }
 
         .bottom-nav button.active .icon-container {
@@ -174,7 +176,7 @@
             height: 24px;
             stroke: var(--inactive-color);
             fill: none;
-            transition: color 0.3s ease, fill 0.3s ease, stroke 0.3s ease; /* Removed transform for hover */
+            transition: color 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
         }
 
         .bottom-nav button.active svg {
@@ -196,8 +198,6 @@
         .bottom-nav button[onclick="showTab('reviews')"].active svg polyline[stroke="white"] {
             stroke: white;
         }
-
-        /* Removed .bottom-nav button:hover svg block */
 
         .bottom-nav button span {
             margin-top: 4px;
@@ -343,9 +343,7 @@
             transition: transform 0.1s ease-in-out;
         }
 
-        /* Removed hover effect for #more-menu-icon */
-
-        #more-menu-icon:active { /* Added active state for the icon */
+        #more-menu-icon:active {
             transform: scale(0.9);
         }
 
@@ -378,12 +376,10 @@
             transition: background-color 0.2s ease;
         }
 
-        .dropdown-item:active { /* Added active state for dropdown items */
-            background-color: var(--dropdown-item-hover);
+        /* تم تغيير لون الخلفية عند الضغط هنا */
+        .dropdown-item:active {
+            background-color: var(--active-bg); 
         }
-
-        /* Removed .dropdown-item:hover block */
-
     </style>
 </head>
 <body class="">
@@ -404,9 +400,9 @@
                 <circle cx="12" cy="19" r="1"></circle>
             </svg>
             <div id="more-menu-dropdown" class="">
-                <a class="dropdown-item" onclick="showTab(&#39;profile&#39;); toggleMoreMenu();">الملف الشخصي</a>
-                <a class="dropdown-item" onclick="showTab(&#39;settings&#39;); toggleMoreMenu();">الإعدادات</a>
-                <a class="dropdown-item" onclick="showTab(&#39;notifications&#39;); toggleMoreMenu();">الإشعارات</a>
+                <a class="dropdown-item" onclick="showTab('profile'); toggleMoreMenu();">الملف الشخصي</a>
+                <a class="dropdown-item" onclick="showTab('settings'); toggleMoreMenu();">الإعدادات</a>
+                <a class="dropdown-item" onclick="showTab('notifications'); toggleMoreMenu();">الإشعارات</a>
             </div>
         </div>
     </header>
@@ -414,7 +410,7 @@
     <main>
         <section id="home" class="active">
             <div class="home-cards-container">
-                <a class="card summaries-card" onclick="showTab(&#39;summaries&#39;)">
+                <a class="card summaries-card" onclick="showTab('summaries')">
                     <h2 class="card-title">الملخصات</h2>
                     <p class="card-description">ملخصات شاملة للمناهج التعليمية</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -425,7 +421,7 @@
                         <line x1="10" y1="14" x2="16" y2="14"></line>
                     </svg>
                 </a>
-                <a class="card store-card" onclick="showTab(&#39;store&#39;)">
+                <a class="card store-card" onclick="showTab('store')">
                     <h2 class="card-title">المتجر</h2>
                     <p class="card-description">لشراء المنتجات الخاصة بالمواد الدراسية</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -474,7 +470,7 @@
     </main>
 
     <nav class="bottom-nav" style="display: flex;">
-        <button onclick="showTab(&#39;home&#39;)" class="active">
+        <button onclick="showTab('home')" class="active">
             <div class="icon-container">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -483,7 +479,7 @@
             </div>
             <span>الرئيسية</span>
         </button>
-        <button onclick="showTab(&#39;exams&#39;)" class="">
+        <button onclick="showTab('exams')" class="">
             <div class="icon-container">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" fill="currentColor"></path>
@@ -495,7 +491,7 @@
             </div>
             <span>اختبارات</span>
         </button>
-        <button onclick="showTab(&#39;reviews&#39;)" class="">
+        <button onclick="showTab('reviews')" class="">
             <div class="icon-container">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" fill="currentColor"></path>
