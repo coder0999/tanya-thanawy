@@ -50,7 +50,7 @@
             const provider = new window.googleAuthProvider();
             // Add this line to force account selection
             provider.setCustomParameters({
-                prompt: 'select_account'
+                prompt: 'select_account' // هذا السطر يفرض اختيار الحساب في كل مرة
             });
             try {
                 await signInWithPopup(window.firebaseAuth, provider);
